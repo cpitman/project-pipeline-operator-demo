@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-pipeline-demo-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: project-pipeline-demo-operator
+  template:
+    metadata:
+      labels:
+        name: project-pipeline-demo-operator
+    spec:
+      serviceAccountName: project-pipeline-demo-operator
+      containers:
+        - name: project-pipeline-demo-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          ports:
+          - containerPort: 60000
+            name: metrics
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: OPERATOR_NAME
+              value: "project-pipeline-demo-operator"

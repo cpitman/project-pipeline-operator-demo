@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: cop.redhat.com
+  kind: ProjectPipeline
+  playbook: /opt/ansible/playbook.yaml

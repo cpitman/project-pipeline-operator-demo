@@ -1,0 +1,31 @@
+---
+- name: Projects for Pipeline
+  k8s:
+    state: present
+    definition:
+      kind: ProjectRequest
+      apiVersion: project.openshift.io/v1
+      metadata:
+        name: "{{ baseName }}-{{ item }}"
+      displayName: "{{ friendlyBaseName }} - {{ item }}"
+  loop: "{{ environments }}"
+
+- name: Jenkins SA Role Binding
+  k8s:
+    state: present
+    definition:
+      apiVersion: authorization.openshift.io/v1
+      kind: RoleBinding
+      metadata:
+        name: jenkins_edit
+        namespace: "{{ baseName }}-{{ item }}"
+      roleRef:
+        name: edit
+      subjects:
+      - kind: ServiceAccount
+        name: "{{ jenkinsServiceAccountName }}"
+        namespace: "{{ jenkinsServiceAccountNamespace }}"
+      userNames:
+      - "system:serviceaccount:{{ jenkinsServiceAccountNamespace }}:{{ jenkinsServiceAccountName }}"
+  loop: "{{ environments }}"
+

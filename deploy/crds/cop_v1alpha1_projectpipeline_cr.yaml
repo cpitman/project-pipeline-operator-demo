@@ -1,0 +1,7 @@
+apiVersion: cop.redhat.com/v1alpha1
+kind: ProjectPipeline
+metadata:
+  name: example-projectpipeline
+spec:
+  # Add fields here
+  size: 3
