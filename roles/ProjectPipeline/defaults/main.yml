@@ -1,8 +1,8 @@
 ---
-baseName: example-app
-friendlyBaseName: An Example App
-jenkinsServiceAccountName: jenkins
-jenkinsServiceAccountNamespace: jenkins
+base_name: example-app
+friendly_base_name: An Example App
+jenkins_service_account_name: jenkins
+jenkins_service_account_namespace: jenkins
 environments:
   - build
   - dev

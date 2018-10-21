@@ -1,4 +1,6 @@
 ---
+- debug:
+    var: vars
 - name: Projects for Pipeline
   k8s:
     state: "{{ state }}"
@@ -6,8 +8,8 @@
       kind: ProjectRequest
       apiVersion: project.openshift.io/v1
       metadata:
-        name: "{{ baseName }}-{{ item }}"
-      displayName: "{{ friendlyBaseName }} - {{ item }}"
+        name: "{{ base_name }}-{{ item }}"
+      displayName: "{{ friendly_base_name }} - {{ item }}"
   loop: "{{ environments }}"
 
 # - name: Jenkins SA Role Binding
