@@ -8,3 +8,5 @@ environments:
   - dev
   - stage
   - prod
+# The following variables are meant for internal use, not via operator `spec`
+state: present

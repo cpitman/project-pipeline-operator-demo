@@ -1,7 +1,7 @@
 ---
 - name: Projects for Pipeline
   k8s:
-    state: present
+    state: "{{ state }}"
     definition:
       kind: ProjectRequest
       apiVersion: project.openshift.io/v1
