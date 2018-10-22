@@ -1,28 +1,19 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
   creationTimestamp: null
   name: project-pipeline-demo-operator
 rules:
 - apiGroups:
-  - ""
+  - project.openshift.io
   resources:
-  - pods
-  - services
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  - configmaps
-  - secrets
+  - projects
   verbs:
   - '*'
 - apiGroups:
-  - apps
+  - authorization.openshift.io
   resources:
-  - deployments
-  - daemonsets
-  - replicasets
-  - statefulsets
+  - rolebindings
   verbs:
   - '*'
 - apiGroups:

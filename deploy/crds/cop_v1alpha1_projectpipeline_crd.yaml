@@ -9,5 +9,5 @@ spec:
     listKind: ProjectPipelineList
     plural: projectpipelines
     singular: projectpipeline
-  scope: Namespaced
+  scope: Cluster
   version: v1alpha1

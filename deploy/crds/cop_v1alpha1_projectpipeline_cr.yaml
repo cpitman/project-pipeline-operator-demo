@@ -3,5 +3,4 @@ kind: ProjectPipeline
 metadata:
   name: example-projectpipeline
 spec:
-  # Add fields here
-  size: 3
+  friendlyName: An Example Project Pipeline

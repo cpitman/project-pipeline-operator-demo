@@ -15,16 +15,13 @@ spec:
       serviceAccountName: project-pipeline-demo-operator
       containers:
         - name: project-pipeline-demo-operator
-          # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: quay.io/cpitman/project-pipeline-operator-demo:latest
           ports:
           - containerPort: 60000
             name: metrics
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
+              value: ""
             - name: OPERATOR_NAME
               value: "project-pipeline-demo-operator"

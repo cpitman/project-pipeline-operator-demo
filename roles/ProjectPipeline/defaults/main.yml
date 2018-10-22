@@ -1,6 +1,5 @@
 ---
-base_name: example-app
-friendly_base_name: An Example App
+friendly_name: An Example App
 jenkins_service_account_name: jenkins
 jenkins_service_account_namespace: jenkins
 environments:
