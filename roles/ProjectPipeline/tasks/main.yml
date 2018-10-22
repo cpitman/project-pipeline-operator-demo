@@ -3,17 +3,27 @@
   k8s:
     state: "present"
     definition:
-      kind: ProjectRequest
       apiVersion: project.openshift.io/v1
+      kind: Project
       metadata:
+        annotations:
+          openshift.io/description: ""
+          openshift.io/display-name: "{{ friendly_base_name }} - {{ item }}"
+          openshift.io/sa.scc.mcs: s0:c21,c0
+          openshift.io/sa.scc.supplemental-groups: 1000420000/10000
+          openshift.io/sa.scc.uid-range: 1000420000/10000
         name: "{{ base_name }}-{{ item }}"
-      displayName: "{{ friendly_base_name }} - {{ item }}"
+      # kind: ProjectRequest
+      # apiVersion: project.openshift.io/v1
+      # metadata:
+      #   name: "{{ base_name }}-{{ item }}"
+      # displayName: "{{ friendly_base_name }} - {{ item }}"
   loop: "{{ environments }}"
   when: state == "present"
 
 - name: Cleanup Projects
   k8s:
-    state: "present"
+    state: "absent"
     definition:
       kind: Project
       apiVersion: project.openshift.io/v1
