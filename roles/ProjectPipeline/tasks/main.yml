@@ -14,36 +14,23 @@
           openshift.io/sa.scc.uid-range: 1000420000/10000
         name: "{{ meta.name }}-{{ item }}"
   loop: "{{ environments }}"
-  when: state == "present"
 
-- name: Cleanup Projects
-  k8s:
-    state: "absent"
-    definition:
-      kind: Project
-      apiVersion: project.openshift.io/v1
-      metadata:
-        name: "{{ meta.name }}-{{ item }}"
-  loop: "{{ environments }}"
-  when: state == "absent"
-
-- name: Jenkins SA Role Binding
-  k8s:
-    state: present
-    definition:
-      apiVersion: authorization.openshift.io/v1
-      kind: RoleBinding
-      metadata:
-        name: jenkins_edit
-        namespace: "{{ meta.name }}-{{ item }}"
-      roleRef:
-        name: edit
-      subjects:
-      - kind: ServiceAccount
-        name: "{{ jenkins_service_account_name }}"
-        namespace: "{{ jenkins_service_account_namespace }}"
-      userNames:
-      - "system:serviceaccount:{{ jenkins_service_account_namespace }}:{{ jenkins_service_account_name }}"
-  loop: "{{ environments }}"
-  when: state == "present"
+# - name: Jenkins SA Role Binding
+#   k8s:
+#     state: present
+#     definition:
+#       apiVersion: authorization.openshift.io/v1
+#       kind: RoleBinding
+#       metadata:
+#         name: jenkins_edit
+#         namespace: "{{ meta.name }}-{{ item }}"
+#       roleRef:
+#         name: edit
+#       subjects:
+#       - kind: ServiceAccount
+#         name: "{{ jenkins_service_account_name }}"
+#         namespace: "{{ jenkins_service_account_namespace }}"
+#       userNames:
+#       - "system:serviceaccount:{{ jenkins_service_account_namespace }}:{{ jenkins_service_account_name }}"
+#   loop: "{{ environments }}"
 
