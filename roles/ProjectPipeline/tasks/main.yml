@@ -1,9 +1,7 @@
 ---
-- debug:
-    var: vars
 - name: Projects for Pipeline
   k8s:
-    state: "{{ state }}"
+    state: "present"
     definition:
       kind: ProjectRequest
       apiVersion: project.openshift.io/v1
@@ -11,6 +9,18 @@
         name: "{{ base_name }}-{{ item }}"
       displayName: "{{ friendly_base_name }} - {{ item }}"
   loop: "{{ environments }}"
+  when: state == "present"
+
+- name: Cleanup Projects
+  k8s:
+    state: "present"
+    definition:
+      kind: Project
+      apiVersion: project.openshift.io/v1
+      metadata:
+        name: "{{ base_name }}-{{ item }}"
+  loop: "{{ environments }}"
+  when: state == "absent"
 
 # - name: Jenkins SA Role Binding
 #   k8s:
